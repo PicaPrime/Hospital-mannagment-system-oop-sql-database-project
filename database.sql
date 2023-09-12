@@ -50,6 +50,23 @@ CREATE TYPE EmployeeType under PersonType(
 
 
 CREATE TABLE empolyees (
-    employee_data PatientType
+    employee_data EmployeeType
 ) NESTED TABLE employee_data.emails STORE AS employee_emails_nested
   NESTED TABLE employee_data.phone_numbers STORE AS employee_phone_numbers_nested;
+
+-- Appointment MedicalRecords Inventory Nurse 
+
+
+CREATE OR REPLACE MedicineType AS OBJECT(
+    medicine_id INT,
+    medicine_name VARCHAR(20),
+    quantity INT,
+    medicine_type VARCHAR(20)
+);
+
+CREATE OR REPLACE TYPE Medicine_list AS table or MedicineType;
+
+create table invertory (
+    invertory_id INT,
+    medicines Medicine_list
+)NESTED TABLE medicines STORE AS medicines_nested;
