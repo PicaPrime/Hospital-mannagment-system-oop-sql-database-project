@@ -1,3 +1,7 @@
+
+-- this file was create just for practice
+-- useless data 
+
 CREATE OR REPLACE TYPE PhoneNumber_list AS TABLE OF VARCHAR2(20);
 /
 CREATE OR REPLACE TYPE Email_list AS TABLE OF VARCHAR2(10);

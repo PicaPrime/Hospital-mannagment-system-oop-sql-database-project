@@ -1,3 +1,10 @@
+
+-- Md. Naimul Islam ID:2020-2-60-173
+-- MD. Iftakhar Alam ID:2020-2-60-003
+-- MD. Saidur Rahman ID:2018-1-60-221
+-- Shahed Akram Musanna ID:2017-2-60-121
+
+
 CREATE OR REPLACE TYPE NameType AS object(
     first_name VARCHAR(50),
     last_name VARCHAR(50)
@@ -22,7 +29,6 @@ create or REPLACE type DoctorType under PersonType (
     specialization VARCHAR(50),
     contact_info VARCHAR(100)
 );
-
 
 CREATE TABLE doctors (
     doctor_data DoctorType
@@ -49,13 +55,11 @@ CREATE TYPE EmployeeType under PersonType(
 );
 
 
-CREATE TABLE empolyees (
+CREATE TABLE employees (
     employee_data EmployeeType
 ) NESTED TABLE employee_data.emails STORE AS employee_emails_nested
   NESTED TABLE employee_data.phone_numbers STORE AS employee_phone_numbers_nested;
-
--- Appointment MedicalRecords Inventory Nurse 
-
+ 
 
 CREATE OR REPLACE MedicineType AS OBJECT(
     medicine_id INT,
@@ -66,7 +70,32 @@ CREATE OR REPLACE MedicineType AS OBJECT(
 
 CREATE OR REPLACE TYPE Medicine_list AS table or MedicineType;
 
-create table invertory (
-    invertory_id INT,
+create table inventory (
+    inventory_id INT,
     medicines Medicine_list
 )NESTED TABLE medicines STORE AS medicines_nested;
+
+
+create type AppointmentType as OBJECT(
+    patient_id INT,
+    doctor_id INT,
+    date_of_appointment DATE,
+    time_of_appointment VARCHAR2(10)
+);
+
+create table appointments of AppointmentType;
+
+create or REPLACE type AdministratorType under PersonType (
+    Administrator_id INT,
+    salary_Administrator INT,
+    contact_info VARCHAR(100)
+);
+
+create TABLE administrators of AdministratorType;
+
+create or REPLACE type DepartmentType(
+    department_id INT,
+    department_name VARCHAR2(20),
+    doctor_id INT,
+    department_info VARCHAR(100)
+); 
